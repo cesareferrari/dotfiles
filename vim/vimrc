@@ -12,8 +12,10 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-liquid'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'mattn/emmet-vim'
+Plugin 'pangloss/vim-javascript'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -117,3 +119,9 @@ autocmd BufNewFile,BufRead * setlocal formatoptions-=cro
 
 " Make it more obviouser when lines are too long
 highlight ColorColumn ctermbg=235
+
+" Have erb tags surround working  outside of a Rails
+" project (for Middleman dev for example)
+" more info here: https://github.com/tpope/vim-rails/issues/245
+let g:surround_{char2nr('-')} = "<% \r %>"
+let g:surround_{char2nr('=')} = "<%= \r %>"

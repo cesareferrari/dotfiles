@@ -16,6 +16,8 @@ Plugin 'tpope/vim-liquid'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'mattn/emmet-vim'
 Plugin 'pangloss/vim-javascript'
+Plugin 'prettier/vim-prettier'
+Plugin 'maxmellon/vim-jsx-pretty'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -125,3 +127,16 @@ highlight ColorColumn ctermbg=235
 " more info here: https://github.com/tpope/vim-rails/issues/245
 let g:surround_{char2nr('-')} = "<% \r %>"
 let g:surround_{char2nr('=')} = "<%= \r %>"
+
+" Seems this is not working.
+set smartcase
+
+
+" Insert timestamp by pressing F3
+nmap <F3> i<C-R>=strftime("%Y%m%d%H%M")<CR><Esc>
+imap <F3> <C-R>=strftime("%Y%m%d%H%M")<CR>
+" format timestamp like this:  2020-05-01 Fri 08:26 AM
+"" nmap <F3> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+
+" Remove numbers from .todo files
+autocmd BufNewFile,BufRead *.todo set nonumber

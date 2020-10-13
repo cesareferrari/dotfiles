@@ -1,3 +1,5 @@
+" This file is in ~/code/dotfiles/vim/vimrc
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -18,6 +20,7 @@ Plugin 'mattn/emmet-vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'prettier/vim-prettier'
 Plugin 'maxmellon/vim-jsx-pretty'
+Plugin 'ledger/vim-ledger'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -140,3 +143,8 @@ imap <F3> <C-R>=strftime("%Y%m%d%H%M")<CR>
 
 " Remove numbers from .todo files
 autocmd BufNewFile,BufRead *.todo set nonumber
+
+" Allow per-project configuration files
+" https://andrew.stwrt.ca/posts/project-specific-vimrc/
+set exrc
+set secure

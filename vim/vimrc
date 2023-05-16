@@ -21,6 +21,11 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'prettier/vim-prettier'
 Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'ledger/vim-ledger'
+Plugin 'dense-analysis/ale'
+Plugin 'vim-airline/vim-airline'
+Plugin 'wuelnerdotexe/vim-astro'
+Plugin 'godlygeek/tabular'
+Plugin 'preservim/vim-markdown'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -58,6 +63,8 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   set hlsearch
 endif
 
+set incsearch
+
 " Softtabs, 2 spaces
 set tabstop=2
 set shiftwidth=2
@@ -88,15 +95,11 @@ let g:rspec_command = "Dispatch bin/rspec {spec}"
 " let g:rspec_command = "!clear && bin/rspec {spec}"
 
 
-" Split edit my vimrc
+" Split edit my vimrc. <leader> is `space`, so it would be `space v r`
 nmap <leader>vr :sp $MYVIMRC<cr>
 
-" Source (reload) my vimrc
+" Source (reload) my vimrc `space s o`
 nmap <leader>so :source $MYVIMRC<cr>
-
-" Make CtrlP use ag for listing the files. Way faster and no useless files.
-" let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
-" let g:ctrlp_use_caching = 0
 
 " The Silver Searcher
 if executable('ag')
@@ -110,8 +113,24 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+" bind K to grep word under cursor
+noremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" bind \ (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+
+
 " By default, vim thinks .md is Modula-2.
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" Set ruby filetype for thor files as well
+autocmd BufNewFile,BufReadPost *.thor set filetype=ruby
+
+" 202208100859 Without this, astro files are not syntax colored.
+" I added a plugin for Astro named 'wuelnerdotexe/vim-astro'
+" but I am not sure it works. Nothing happens with the files.
+" Adding this line works for now.
+autocmd BufNewFile,BufReadPost *.astro set filetype=html
 
 " Without this, vim breaks in the middle of words when wrapping
 autocmd FileType markdown setlocal nolist wrap lbr
@@ -131,9 +150,8 @@ highlight ColorColumn ctermbg=235
 let g:surround_{char2nr('-')} = "<% \r %>"
 let g:surround_{char2nr('=')} = "<%= \r %>"
 
-" Seems this is not working.
-set smartcase
-
+" search ignoring the case
+set ignorecase
 
 " Insert timestamp by pressing F3
 nmap <F3> i<C-R>=strftime("%Y%m%d%H%M")<CR><Esc>
@@ -148,3 +166,30 @@ autocmd BufNewFile,BufRead *.todo set nonumber
 " https://andrew.stwrt.ca/posts/project-specific-vimrc/
 set exrc
 set secure
+
+" Set Standard as the only linter and fixer for Ruby files 
+" and thereby preventing conflicts with RuboCop
+let g:ale_linters = {'ruby': ['standardrb']}
+let g:ale_fixers = {'ruby': ['standardrb']}
+
+" automatically fixing on save
+let g:ale_fix_on_save = 1
+
+" show errors or warnings in my statusline
+" works with vim-airline
+" https://github.com/vim-airline/vim-airline
+let g:airline#extensions#ale#enabled = 1
+
+" case insensitive search but it will switch to case sensitive if I use capital letter
+set smartcase
+
+" By default vim-markdown plugin activates folds. This disables the folds for the plugin.
+let g:vim_markdown_folding_disabled=1
+
+" Highlight YAML frontmatter
+let g:vim_markdown_frontmatter = 1
+
+" By default, Vim opens the split to the left or top of the current window
+" these set to open the split below or right
+set splitbelow
+set splitright

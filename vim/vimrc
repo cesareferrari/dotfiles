@@ -1,4 +1,7 @@
-" This file is in ~/code/dotfiles/vim/vimrc
+" This file is in ~/dotfiles/vim/vimrc
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -20,12 +23,13 @@ Plugin 'mattn/emmet-vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'prettier/vim-prettier'
 Plugin 'maxmellon/vim-jsx-pretty'
-Plugin 'ledger/vim-ledger'
+"Plugin 'ledger/vim-ledger'
 Plugin 'dense-analysis/ale'
 Plugin 'vim-airline/vim-airline'
 Plugin 'wuelnerdotexe/vim-astro'
 Plugin 'godlygeek/tabular'
 Plugin 'preservim/vim-markdown'
+Plugin 'instant-markdown/vim-instant-markdown'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -48,7 +52,8 @@ let mapleader = "\<Space>"
 set number
 set numberwidth=5
 
-set nocompatible                " Don't maintain compatibilty with Vi.
+" At the beginning it says filetype off, I am not sure if I have
+" to keep on or off. Figure this out.
 filetype on
 set hidden                      " Allow buffer change w/o saving
 set lazyredraw                  " Don't update while executing macros
@@ -193,3 +198,5 @@ let g:vim_markdown_frontmatter = 1
 " these set to open the split below or right
 set splitbelow
 set splitright
+
+au BufReadCmd *.epub call zip#Browse(expand("<amatch>"))

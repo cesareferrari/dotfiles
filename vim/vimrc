@@ -200,3 +200,6 @@ set splitbelow
 set splitright
 
 au BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
+
+" enable mouse
+" set mouse=a

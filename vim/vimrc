@@ -29,7 +29,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'wuelnerdotexe/vim-astro'
 Plugin 'godlygeek/tabular'
 Plugin 'preservim/vim-markdown'
-Plugin 'instant-markdown/vim-instant-markdown'
+" Plugin 'instant-markdown/vim-instant-markdown'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

@@ -202,7 +202,6 @@ set splitright
 
 au BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
 
-
 " Twiddle case
 " With the following you can visually select text then
 " press ~ to convert the text to UPPER CASE, then to lower case, then to Title
@@ -220,3 +219,6 @@ function! TwiddleCase(str)
   return result
 endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
+
+" enable mouse
+" set mouse=a

@@ -24,7 +24,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'prettier/vim-prettier'
 Plugin 'maxmellon/vim-jsx-pretty'
 "Plugin 'ledger/vim-ledger'
-Plugin 'dense-analysis/ale'
+"Plugin 'dense-analysis/ale'
 Plugin 'vim-airline/vim-airline'
 Plugin 'wuelnerdotexe/vim-astro'
 Plugin 'godlygeek/tabular'
@@ -138,8 +138,12 @@ autocmd BufNewFile,BufReadPost *.thor set filetype=ruby
 " Adding this line works for now.
 autocmd BufNewFile,BufReadPost *.astro set filetype=html
 
+let g:astro_typescript = 'enable'
+
+
 " Without this, vim breaks in the middle of words when wrapping
 autocmd FileType markdown setlocal nolist wrap lbr
+
 
 " Wrap the quickfix window
 autocmd FileType qf setlocal wrap linebreak
